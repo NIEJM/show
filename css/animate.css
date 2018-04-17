@@ -1,0 +1,13 @@
+@charset 'utf-8';
+body{margin:0px;padding: 0px;}
+ul,li{margin:0px;padding: 0px;list-style: none;}
+img{border: none;width: 100%;display: block;height: 100%;}
+.clearfix:after{display: block;content: "";clear: both;}
+.container{width: 100%;height: auto;overflow: hidden;margin: 20px auto;}
+.container .autoShow{width: 9999px;height: auto;overflow: hidden; margin-left: -263.5px;}
+.autoShow li{float: left;text-align: center;box-sizing: border-box;}
+.autoShow li a{display: inline-block;width: 94%;height: 100%;}
+
+
+
+
