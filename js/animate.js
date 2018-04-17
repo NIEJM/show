@@ -4,7 +4,7 @@
 var container = document.getElementsByClassName('container');//容器
 var lis = document.getElementsByTagName('li');//图片集
 var autoShow = document.getElementsByClassName('autoShow');
-var time=10000,index=0,interval=10,animated=false,change=1;
+var time=10000,index=0,interval=20,animated=false,change=1;
 
 if(container !== null && lis !== null){
 	var con_w = container[0].clientWidth;
@@ -32,8 +32,8 @@ function run(){
 	// console.log(leftL)
 	function animate(){
 		var autoShowL = parseFloat(autoShow[0].style.marginLeft); 
-		moveL*=1.1;
-		console.log(autoShowL ,leftL,moveL)
+		moveL*=1.5;
+		console.log(autoShowL,leftL,moveL)
 		if(autoShowL > leftL){
 			if(autoShowL - moveL <leftL){
 				autoShow[0].style.marginLeft = autoShowLpass - lis_w + 'px';
