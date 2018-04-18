@@ -24,34 +24,35 @@ var marginLeftNow=0;
 console.log(container[0].offsetHeight,container[0].clientHeight);
 	autoShow[0].style.marginLeft = -(lis_w-con_w*0.1)+'px';
 // 运行主函数
-function run(marginLeftNow){
+function run(marginLeftNow,offset){
 	animated = true;
-	var moveL = parseFloat(lis_w)/(time/interval);//每次移动的距离
+	var moveL = offset/(time/interval);//每次移动的距离
 	var autoShowLpass = parseFloat(autoShow[0].style.marginLeft);
-	var leftL = marginLeftNow - parseFloat(lis_w);
+	var leftL = marginLeftNow + offset;
 	leftL = Number(leftL.toFixed(2));
-	// console.log(leftL)
+	console.log(moveL)
 	function animate(){
-		var autoShowL = parseFloat(autoShow[0].style.marginLeft); 
-		moveL++;
-		// console.log(autoShowL - leftL,leftL)
-		if(autoShowL > leftL){
-			if(autoShowL - moveL <leftL){
-				autoShow[0].style.marginLeft = marginLeftNow - lis_w + 'px';
+		var autoShowL = parseFloat(autoShow[0].style.marginLeft);
+		var autoShowL_move =  autoShowL - moveL;
+		moveL<0 ? moveL-- : moveL++;
+		// console.log(autoShowL > leftL)
+		if(autoShowL > leftL || autoShowL < leftL ){
+			if(autoShowL_move <leftL && autoShowL > leftL || autoShowL_move > leftL && autoShowL < leftL){
+				// console.log(1);
+				autoShow[0].style.marginLeft = marginLeftNow + offset + 'px';
 				setTimeout(arguments.callee,interval);
 			}else{
-
-				autoShow[0].style.marginLeft = autoShowL - moveL + 'px';
+				autoShow[0].style.marginLeft = autoShowL + moveL + 'px';
 				setTimeout(arguments.callee,interval);
 			}
-
 		}else{
-			if(autoShowL <= -lis_w * (lis.length-3)){
-
+			if(autoShowL >=0){
+				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) - lis_w * (lis.length-4) + 'px';
+			}else if(autoShowL <= -lis_w * (lis.length-3)){
 				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) + 'px';
 			}
 			animated=false;
-			console.log(autoShowL)
+			// console.log(autoShowL)
 
 		} 
 	}
@@ -67,24 +68,25 @@ function changeShow(){
 		}
 	}
 }
-
+changeShow();
 function autoplay(){
-	console.log(1);
+	// console.log(1);
 	if(animated){return };
 	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
 	change++;
-	run(marginLeftNow);
+	run(marginLeftNow,-lis_w);
 	changeShow();
 	if(change>=lis.length-3){change=0;}
 	handler=setTimeout(arguments.callee,2000);
 }
+var X=0;
 autoShow[0].ontouchstart = function(e){
 	clearTimeout(handler);
 	e = e || window.e;
 	e.preventDefault();
 	startX = e.touches[0].pageX;
 	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
-	console.log(startX,marginLeftNow)
+	// console.log(startX,marginLeftNow)
 }
 autoShow[0].ontouchmove = function(e){
 	clearTimeout(handler);
@@ -92,35 +94,30 @@ autoShow[0].ontouchmove = function(e){
 	e.preventDefault();
 	endX = e.touches[0].pageX;
 	X=endX - startX;
-	console.log(X)
+	// console.log(X)
     autoShow[0].style.marginLeft = marginLeftNow + X + 'px';
 
 }
 autoShow[0].ontouchend = function(e){
 	clearTimeout(handler);
 	e = e || window.e;
+	console.log("start"+change)
 	if(X>0){
-
+		change--;
+		if(change < 1){console.log(5); change=lis.length-3;}
+		changeShow();
+		console.log("endX"+change)
+		run(marginLeftNow,lis_w);
+		
 		console.log('右');
 	}else{
 		change++;
 		changeShow();
-		run(marginLeftNow);
+		run(marginLeftNow,-lis_w);
 		if(change>=lis.length-3){change=0;}
 		console.log('左');
 	}
-
-
 }
-autoplay();
+// autoplay();
 
-
-// document.ontouchstart = function(){
-// 	clearTimeout(handler);
-// 	alert(1);
-// }
-// document.ontouchend = function(){
-// 	autoplay();
-// 	alert(2);
-// }
 
