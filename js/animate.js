@@ -81,7 +81,9 @@ function autoplay(){
 }
 var X=0;
 autoShow[0].ontouchstart = function(e){
+	
 	clearTimeout(handler);
+	if(animated){return };
 	e = e || window.e;
 	e.preventDefault();
 	startX = e.touches[0].pageX;
@@ -90,6 +92,7 @@ autoShow[0].ontouchstart = function(e){
 }
 autoShow[0].ontouchmove = function(e){
 	clearTimeout(handler);
+	// if(animated){return };
 	e = e || window.e;
 	e.preventDefault();
 	endX = e.touches[0].pageX;
@@ -101,7 +104,8 @@ autoShow[0].ontouchmove = function(e){
 autoShow[0].ontouchend = function(e){
 	clearTimeout(handler);
 	e = e || window.e;
-	console.log("start"+change)
+	console.log("start"+change);
+	if(animated){return };
 	if(X>0){
 		change--;
 		if(change < 1){console.log(5); change=lis.length-3;}
