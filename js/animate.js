@@ -118,6 +118,6 @@ autoShow[0].ontouchend = function(e){
 		console.log('左');
 	}
 }
-// autoplay();
+ autoplay();
 
 
