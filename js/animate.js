@@ -52,6 +52,7 @@ function run(marginLeftNow,offset){
 				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) + 'px';
 			}
 			animated=false;
+			touchscreen=false;
 			// console.log(autoShowL)
 			// autoplay();
 		} 
@@ -75,16 +76,19 @@ function autoplay(){
 	// console.log(1);
 	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
 	change++;
+	if(change>lis.length-3){change=1;}
 	run(marginLeftNow,-lis_w);
 	changeShow();
-	if(change>=lis.length-3){change=0;}
+	
 	
 	handler=setTimeout(autoplay,2000);
 }
-var X=0;
+var X=0,touchscreen=false;
 autoShow[0].ontouchstart = function(e){
 	clearTimeout(handler);
 	if(animated){return };
+	if(touchscreen){return };
+	touchscreen=true;
 	e = e || window.e;
 	e.preventDefault();
 	startX = e.touches[0].clientX;
@@ -125,9 +129,10 @@ autoShow[0].ontouchend = function(e){
 		run(marginLeftNow,-lis_w);
 		console.log('左');
 	}
+	
 	handler=setTimeout(autoplay,2000);
 	
 }
-autoplay();
+// autoplay();
 
 
