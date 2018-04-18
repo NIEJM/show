@@ -105,19 +105,21 @@ autoShow[0].ontouchend = function(e){
 	if(X>0){
 		change--;
 		if(change < 1){console.log(5); change=lis.length-3;}
+		console.log("endX"+change);
 		changeShow();
-		console.log("endX"+change)
+		
 		run(marginLeftNow,lis_w);
 		
 		console.log('右');
 	}else{
 		change++;
+		if(change>lis.length-3){change=1;}
 		changeShow();
 		run(marginLeftNow,-lis_w);
-		if(change>=lis.length-3){change=0;}
+		
 		console.log('左');
 	}
 }
- autoplay();
+// autoplay();
 
 
