@@ -106,6 +106,7 @@ autoShow[0].ontouchend = function(e){
 		change++;
 		changeShow();
 		run(marginLeftNow);
+		if(change>=lis.length-3){change=0;}
 		console.log('左');
 	}
 
