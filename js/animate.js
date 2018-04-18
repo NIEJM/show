@@ -19,24 +19,25 @@ if(container !== null && lis !== null){
 		lis[i].style.height = con_h +'px';
 	}
 }
-	
+
+var marginLeftNow=0;
 console.log(container[0].offsetHeight,container[0].clientHeight);
 	autoShow[0].style.marginLeft = -(lis_w-con_w*0.1)+'px';
 // 运行主函数
-function run(){
+function run(marginLeftNow){
 	animated = true;
 	var moveL = parseFloat(lis_w)/(time/interval);//每次移动的距离
 	var autoShowLpass = parseFloat(autoShow[0].style.marginLeft);
-	var leftL = parseFloat(autoShow[0].style.marginLeft) - parseFloat(lis_w);
+	var leftL = marginLeftNow - parseFloat(lis_w);
 	leftL = Number(leftL.toFixed(2));
 	// console.log(leftL)
 	function animate(){
 		var autoShowL = parseFloat(autoShow[0].style.marginLeft); 
 		moveL++;
-		console.log(autoShowL - leftL,leftL)
+		// console.log(autoShowL - leftL,leftL)
 		if(autoShowL > leftL){
 			if(autoShowL - moveL <leftL){
-				autoShow[0].style.marginLeft = autoShowLpass - lis_w + 'px';
+				autoShow[0].style.marginLeft = marginLeftNow - lis_w + 'px';
 				setTimeout(arguments.callee,interval);
 			}else{
 
@@ -50,6 +51,8 @@ function run(){
 				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) + 'px';
 			}
 			animated=false;
+			console.log(autoShowL)
+
 		} 
 	}
 	animate();
@@ -68,21 +71,55 @@ function changeShow(){
 function autoplay(){
 	console.log(1);
 	if(animated){return };
-	
+	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
 	change++;
-	run();
+	run(marginLeftNow);
 	changeShow();
 	if(change>=lis.length-3){change=0;}
 	handler=setTimeout(arguments.callee,2000);
 }
+autoShow[0].ontouchstart = function(e){
+	clearTimeout(handler);
+	e = e || window.e;
+	e.preventDefault();
+	startX = e.touches[0].pageX;
+	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
+	console.log(startX,marginLeftNow)
+}
+autoShow[0].ontouchmove = function(e){
+	clearTimeout(handler);
+	e = e || window.e;
+	e.preventDefault();
+	endX = e.touches[0].pageX;
+	X=endX - startX;
+	console.log(X)
+    autoShow[0].style.marginLeft = marginLeftNow + X + 'px';
+
+}
+autoShow[0].ontouchend = function(e){
+	clearTimeout(handler);
+	e = e || window.e;
+	if(X>0){
+
+		console.log('右');
+	}else{
+		change++;
+		changeShow();
+		run(marginLeftNow);
+		console.log('左');
+	}
+
+
+}
 autoplay();
 
-document.ontouchstart = function(){
-	clearTimeout(handler);
-	alert(1);
-}
-document.ontouchend = function(){
-	autoplay();
-	alert(2);
-}
+
+// document.ontouchstart = function(){
+// 	clearTimeout(handler);
+// 	alert(1);
+// }
+// document.ontouchend = function(){
+// 	autoplay();
+// 	alert(2);
+// }
 
