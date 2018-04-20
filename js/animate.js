@@ -87,7 +87,6 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
-	console.log(screen)
 	if(screen){return;}
 	if(animated){return;}
 	if(slidingstate==0){
@@ -140,7 +139,7 @@ autoShow[0].ontouchend = function(e){
 		}
 		setTimeout(function(){
 			screen = false;
-		},2000)
+		},1000)
 		handler=setTimeout(autoplay,1500);	
 	}
 	slidingstate=0;
