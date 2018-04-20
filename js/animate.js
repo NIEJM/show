@@ -5,7 +5,9 @@ var container = document.getElementsByClassName('container');//容器
 var lis = document.getElementsByTagName('li');//图片集
 var autoShow = document.getElementsByClassName('autoShow');
 var time=10000,index=0,interval=10,animated=false,change=1,handler;
-
+show = document.createElement('div');
+show.style.textAlign = 'center';
+document.body.appendChild(show);
 if(container !== null && lis !== null){
 	var con_w = container[0].clientWidth;
 	for(var i=0;i<lis.length;i++){
@@ -100,11 +102,9 @@ autoShow[0].ontouchmove = function(e){
      } else {
         pointerData = e;
      }
-
+     // alert(pointerData.pageX)
      endX = pointerData.pageX;
-     alert(endX);
-     console.log(endX)
-
+     show.innerHTML = endX;
      X = endX-startX;
 	if(slidingstate==1 && X!=0){
 		slidingstate=2;
