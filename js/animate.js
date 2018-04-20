@@ -87,7 +87,9 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
-	if(screen){return;};
+	console.log(screen)
+	if(screen){return;}
+	if(animated){return;}
 	if(slidingstate==0){
 		slidingstate=1;
 		startX = e.touches[0].pageX;
@@ -102,7 +104,6 @@ autoShow[0].ontouchmove = function(e){
      } else {
         pointerData = e;
      }
-     // alert(pointerData.pageX)
      endX = pointerData.pageX;
      show.innerHTML =endX-startX;
      X = endX-startX;
@@ -139,7 +140,7 @@ autoShow[0].ontouchend = function(e){
 		}
 		setTimeout(function(){
 			screen = false;
-		},500)
+		},2000)
 		handler=setTimeout(autoplay,1500);	
 	}
 	slidingstate=0;
