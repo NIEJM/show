@@ -51,7 +51,10 @@ function run(marginLeftNow,offset){
 			}else if(autoShowL <= -lis_w * (lis.length-3)){
 				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) + 'px';
 			}
-			animated=false;
+			setTimeout(function(){
+				animated =false;
+			},500);
+			// animated=false;
 		} 
 	}
 	animate();
@@ -77,12 +80,12 @@ function autoplay(){
 	changeShow();
 	handler=setTimeout(autoplay,1500);
 }
-var X=0,slidingstate=0,z=0,end1=0,end2=0;
+var X=0,slidingstate=0,z=0,end1=0,end2=0,screen=false;
 autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
-	if(animated){return false};//
+	if(screen){return;};
 	if(slidingstate==0){
 		slidingstate=1;
 		startX = e.touches[0].clientX;
@@ -91,7 +94,7 @@ autoShow[0].ontouchstart = function(e){//手指触发
 }
 autoShow[0].ontouchmove = function(e){
 	e = e || window.e;
-	// clearTimeout(handler);
+	clearTimeout(handler);
 	if (e.touches) {
         pointerData = e.touches[0];
      } else {
@@ -99,9 +102,10 @@ autoShow[0].ontouchmove = function(e){
      }
      endX = pointerData.clientX;
      X = endX-startX;
-	if(slidingstate==1){
+	if(slidingstate==1 && X!=0){
 		slidingstate=2;
 	}
+	console.log('move2 '+slidingstate)
 	if(slidingstate==2){
 		e.preventDefault();
 		if(X<0 && X <= -lis_w){
@@ -109,8 +113,6 @@ autoShow[0].ontouchmove = function(e){
 		}else if( X>0 && X >= lis_w){
 			X = lis_w;
 		}
-
-		
 	    autoShow[0].style.marginLeft = marginLeftNow + X + 'px';
 	}
 }
@@ -118,6 +120,8 @@ autoShow[0].ontouchend = function(e){
 	e = e || window.e;
 	e.preventDefault();
 	if(slidingstate==2){
+		console.log('run');
+		screen=true;
 		slidingstate=0;
 		if(X>0){
 			change--;
@@ -130,10 +134,13 @@ autoShow[0].ontouchend = function(e){
 			changeShow();
 			run(marginLeftNow,-lis_w);
 		}
+		setTimeout(function(){
+			screen = false;
+		},500)
+		handler=setTimeout(autoplay,1500);	
 	}
-	handler=setTimeout(autoplay,1500);	
+	slidingstate=0;
 }
-
 autoplay();
 
 
