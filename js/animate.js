@@ -105,7 +105,6 @@ autoShow[0].ontouchmove = function(e){
      }
      endX = pointerData.pageX;
      show.innerHTML =endX;
-     alert(endX)
      X = endX-startX;
 	if(slidingstate==1 && X!=0){
 		slidingstate=2;
