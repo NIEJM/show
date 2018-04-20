@@ -75,14 +75,14 @@ function autoplay(){
 	if(change>lis.length-3){change=1;}
 	run(marginLeftNow,-lis_w);
 	changeShow();
-	handler=setTimeout(autoplay,2000);
+	handler=setTimeout(autoplay,1500);
 }
 var X=0,slidingstate=0,z=0,end1=0,end2=0;
-autoShow[0].ontouchstart = function(e){
+autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
-	if(animated){return false};
+	if(animated){return false};//
 	if(slidingstate==0){
 		slidingstate=1;
 		startX = e.touches[0].clientX;
@@ -130,9 +130,8 @@ autoShow[0].ontouchend = function(e){
 			changeShow();
 			run(marginLeftNow,-lis_w);
 		}
-
 	}
-	handler=setTimeout(autoplay,1000);	
+	handler=setTimeout(autoplay,1500);	
 }
 
 autoplay();
