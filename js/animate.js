@@ -52,12 +52,11 @@ function run(marginLeftNow,offset){
 				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) + 'px';
 			}
 			animated=false;
-			touchscreen=false;
-			// console.log(autoShowL)
-			// autoplay();
+			// touchscreen=false;
 		} 
 	}
 	animate();
+
 }
 
 function changeShow(){
@@ -70,69 +69,77 @@ function changeShow(){
 	}
 }
 changeShow();
+console.log(2);
 function autoplay(){
-	
-	if(animated){return };
-	// console.log(1);
+	console.log(1);
+	if(animated){return false};
 	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
 	change++;
 	if(change>lis.length-3){change=1;}
 	run(marginLeftNow,-lis_w);
 	changeShow();
-	
-	
+
 	handler=setTimeout(autoplay,2000);
 }
-var X=0,touchscreen=false;
+var X=0,slidingstate=0,z=0,end1=0,end2=0;
 autoShow[0].ontouchstart = function(e){
-	clearTimeout(handler);
-	if(animated){return };
-	if(touchscreen){return };
-	touchscreen=true;
 	e = e || window.e;
 	e.preventDefault();
-	startX = e.touches[0].clientX;
-	marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
-}
-autoShow[0].ontouchmove = function(e){
 	clearTimeout(handler);
-	if(animated){return };
-	e = e || window.e;
-	e.preventDefault();
-	endX = e.touches[0].clientX;
-	X = endX - startX;
-	if(X<0 && X <= -lis_w){
-		X = -lis_w;
-	}else if( X>0 && X >= lis_w){
-		X = lis_w;
+	if(animated){return false};
+	if(slidingstate==0){
+		slidingstate=1;
+		touchscreen=false;
+		console.log("start"+ z++);
+		startX = e.touches[0].clientX;
+		marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
 	}
-    autoShow[0].style.marginLeft = marginLeftNow + X + 'px';
 
 }
-autoShow[0].ontouchend = function(e){
+autoShow[0].ontouchmove = function(e){
+	e = e || window.e;
 	clearTimeout(handler);
+	if(slidingstate==1){
+		slidingstate=2;
+		endX = e.touches[0].clientX;
+		X = endX-startX;
+	}
+	if(slidingstate==2){
+		e.preventDefault();
+		if(X<0 && X <= -lis_w){
+			X = -lis_w;
+		}else if( X>0 && X >= lis_w){
+			X = lis_w;
+		}
+
+		console.log(X);
+	    autoShow[0].style.marginLeft = marginLeftNow + X + 'px';
+	}
+}
+autoShow[0].ontouchend = function(e){
 	e = e || window.e;
 	e.preventDefault();
-	console.log("start"+change,X);
-	if(animated){return };
-	if(X>0){
-		change--;
-		if(change < 1){console.log(5); change=lis.length-3;}
-		console.log("endX"+change);
-		changeShow();
-		run(marginLeftNow,lis_w);
-		console.log('右');
-	}else{
-		change++;
-		if(change>lis.length-3){change=1;}
-		changeShow();
-		run(marginLeftNow,-lis_w);
-		console.log('左');
+	if(slidingstate==2){
+		slidingstate=0;
+		if(X>0){
+			change--;
+			if(change < 1){console.log(5); change=lis.length-3;}
+			// console.log("endX"+change);
+			changeShow();
+			run(marginLeftNow,lis_w);
+			// console.log('右');
+		}else if(X<0){
+			change++;
+			if(change>lis.length-3){change=1;}
+			changeShow();
+			run(marginLeftNow,-lis_w);
+			// console.log('左');
+		}
+
 	}
-	
-	handler=setTimeout(autoplay,2000);
-	
+	handler=setTimeout(autoplay,1000);	
 }
-// autoplay();
+
+autoplay();
 
 
