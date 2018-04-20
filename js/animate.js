@@ -87,9 +87,9 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
+	alert('55')
 	if(screen){return;}
 	if(animated){return;}
-	alert('55')
 	if(slidingstate==0){
 		slidingstate=1;
 		startX = e.touches[0].pageX;
