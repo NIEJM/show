@@ -87,7 +87,7 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
-	alert('55')
+	alert('55',screen,animated);
 	if(screen){return;}
 	if(animated){return;}
 	if(slidingstate==0){
