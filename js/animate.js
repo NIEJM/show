@@ -104,12 +104,11 @@ autoShow[0].ontouchmove = function(e){
      }
      // alert(pointerData.pageX)
      endX = pointerData.pageX;
-     show.innerHTML = endX;
+     show.innerHTML ='endX:'+ endX +"startX:"+startX + "---:"+endX-startX;
      X = endX-startX;
 	if(slidingstate==1 && X!=0){
 		slidingstate=2;
 	}
-	console.log('move2 '+slidingstate)
 	if(slidingstate==2){
 		e.preventDefault();
 		if(X<0 && X <= -lis_w){
