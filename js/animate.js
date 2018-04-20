@@ -85,11 +85,11 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	e = e || window.e;
 	e.preventDefault();
 	clearTimeout(handler);
-	alert('51');
-	if(screen){return;}
-	alert('52');
+	//alert('51');
+	//if(screen){return;}
+	//alert('52');
 	if(animated){return;}
-	alert('53');
+	//alert('53');
 	if(slidingstate==0){
 		slidingstate=1;
 		startX = e.touches[0].pageX;
