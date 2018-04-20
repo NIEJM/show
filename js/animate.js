@@ -87,7 +87,7 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	clearTimeout(handler);
 	
 	if(screen){return;}
-	if(animated){alert("22");return;}
+	//if(animated){return;}
 	alert('52',screen,animated);
 	if(slidingstate==0){
 		slidingstate=1;
