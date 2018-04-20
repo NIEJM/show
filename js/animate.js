@@ -88,7 +88,7 @@ autoShow[0].ontouchstart = function(e){//手指触发
 	if(screen){return;};
 	if(slidingstate==0){
 		slidingstate=1;
-		startX = e.touches[0].clientX;
+		startX = e.touches[0].pageX;
 		marginLeftNow = parseFloat(autoShow[0].style.marginLeft);
 	}
 }
@@ -100,7 +100,10 @@ autoShow[0].ontouchmove = function(e){
      } else {
         pointerData = e;
      }
-     endX = pointerData.clientX;
+     // alert(pointerData.pageX)
+     endX = pointerData.pageX;
+     alert(endX);
+     console.log(endX)
      X = endX-startX;
 	if(slidingstate==1 && X!=0){
 		slidingstate=2;
