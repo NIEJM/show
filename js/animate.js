@@ -104,7 +104,8 @@ autoShow[0].ontouchmove = function(e){
         pointerData = e;
      }
      endX = pointerData.pageX;
-     show.innerHTML =endX-startX;
+     show.innerHTML =endX;
+     alert(endX)
      X = endX-startX;
 	if(slidingstate==1 && X!=0){
 		slidingstate=2;
@@ -139,7 +140,7 @@ autoShow[0].ontouchend = function(e){
 		}
 		setTimeout(function(){
 			screen = false;
-		},1000)
+		},500)
 		handler=setTimeout(autoplay,1500);	
 	}
 	slidingstate=0;
