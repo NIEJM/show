@@ -1,10 +1,9 @@
 // 
 // 
-
 var container = document.getElementsByClassName('container');//容器
 var lis = document.getElementsByTagName('li');//图片集
 var autoShow = document.getElementsByClassName('autoShow');
-var time=10000,index=0,interval=10,animated=false,change=1,handler;
+var time=200,index=0,interval=10,animated=false,change=1,handler;
 show = document.createElement('div');
 show.style.textAlign = 'center';
 document.body.appendChild(show);
@@ -36,11 +35,9 @@ function run(marginLeftNow,offset){
 	function animate(){
 		var autoShowL = parseFloat(autoShow[0].style.marginLeft);
 		var autoShowL_move =  autoShowL - moveL;
-		moveL<0 ? moveL-- : moveL++;
-		// console.log(moveL)
+		// moveL<0 ? moveL-- : moveL++;
 		if(autoShowL > leftL || autoShowL < leftL ){
 			if(autoShowL_move <leftL && autoShowL > leftL || autoShowL_move > leftL && autoShowL < leftL){
-				// console.log(1);
 				autoShow[0].style.marginLeft = marginLeftNow + offset + 'px';
 				setTimeout(arguments.callee,interval);
 			}else{
@@ -53,14 +50,10 @@ function run(marginLeftNow,offset){
 			}else if(autoShowL <= -lis_w * (lis.length-3)){
 				autoShow[0].style.marginLeft = -(lis_w-con_w*0.1) + 'px';
 			}
-			// setTimeout(function(){
-			// 	animated =false;
-			// },500);
 			animated=false;
 		} 
 	}
 	animate();
-
 }
 
 function changeShow(){
@@ -147,4 +140,6 @@ autoShow[0].ontouchend = function(e){
 }
 autoplay();
 
-
+if(container !== null){
+	container[0].style.visibility = 'visible';
+}
