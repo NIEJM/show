@@ -9,13 +9,14 @@ show.style.textAlign = 'center';
 document.body.appendChild(show);
 if(container !== null && lis !== null){
 	var con_w = container[0].clientWidth;
+	container[0].style.height = con_w*(7/15) + 'px';
 	for(var i=0;i<lis.length;i++){
 		var lis_w = con_w * 0.8;
 		lis[i].index = i;//给图片编辑序列号
 		lis[i].style.width = lis_w +'px';
 		
 	}
-	var con_h = container[0].clientHeight;
+	// var con_h = container[0].clientHeight;
 	// for(var i=0;i<lis.length;i++){
 	// 	lis[i].style.height = con_h +'px';
 	// }

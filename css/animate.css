@@ -5,10 +5,10 @@ img{border: none;width: 100%;display: block;height: 100%;}
 .clearfix:after{display: block;content: "";clear: both;}
 .container{width: 100%;height: auto;overflow: hidden;margin: 20px auto;
 	max-width: 768px;visibility: hidden;}
-.container .autoShow{width: 9999px;height: auto;overflow: hidden; margin-left: -263.5px;}
-.autoShow li{float: left;text-align: center;box-sizing: border-box;padding: 10px;}
+.container .autoShow{width: 9999px;height: auto;overflow: hidden; margin-left: -263.5px;
+height: 100%;}
+.autoShow li{float: left;text-align: center;box-sizing: border-box;padding:10px;height: 100%;}
 .autoShow li a{display: inline-block;width: 94%;height: 100%;}
-
 
 /*
 商品列表特效
