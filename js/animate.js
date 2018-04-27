@@ -16,9 +16,9 @@ if(container !== null && lis !== null){
 		
 	}
 	var con_h = container[0].clientHeight;
-	for(var i=0;i<lis.length;i++){
-		lis[i].style.height = con_h +'px';
-	}
+	// for(var i=0;i<lis.length;i++){
+	// 	lis[i].style.height = con_h +'px';
+	// }
 }
 
 var marginLeftNow=0;
